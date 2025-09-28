@@ -1,0 +1,40 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+
+  backend "s3" {
+    ## homework:start
+    bucket = "terraforms3backend21-paulapirela-terraform-state"
+    key = "terraform.tfstate"
+    region = "us-east-1"
+    ## homework:end
+    # use_lockfile = true
+    encrypt    = true
+    kms_key_id = "752bf32d-a3a0-4783-95f4-8f479f83a702"
+  }
+}
+
+provider "aws" {
+  ## homework:start
+  ## homework:end
+  region = "us-east-1"
+
+  default_tags {
+    tags = {
+      Topic = "terraform"
+      ## homework:start
+      ## homework:end
+    }
+  }
+}
+
+resource "aws_s3_bucket" "bucket" {
+  ## homework:start
+  bucket = "paula-terraform-quickstart-bucket-unique"
+  
+  ## homework:end
+}
